@@ -3,8 +3,8 @@
 // @namespace    https://github.com/kenkoedu
 // @version      0.2
 // @description  Print and download OQB assessments on edcity.hk.
-// @updateURL    https://raw.githubusercontent.com/kenkoedu/oqb-printer/refs/heads/main/oqb-printer.user.js
-// @downloadURL  https://raw.githubusercontent.com/kenkoedu/oqb-printer/refs/heads/main/oqb-printer.user.js
+// @updateURL    https://raw.githubusercontent.com/kenkoedu/oqb-printer/main/oqb-printer.user.js
+// @downloadURL  https://raw.githubusercontent.com/kenkoedu/oqb-printer/main/oqb-printer.user.js
 // @grant        GM_xmlhttpRequest
 // @match        https://oqb.hkedcity.net/*
 // @match        https://oqb.edcity.hk/*
