@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OQB Printer
 // @namespace    https://github.com/kenkoedu
-// @version      0.2
+// @version      0.3
 // @description  Print and download OQB assessments on edcity.hk.
 // @updateURL    https://raw.githubusercontent.com/kenkoedu/oqb-printer/main/oqb-printer.user.js
 // @downloadURL  https://raw.githubusercontent.com/kenkoedu/oqb-printer/main/oqb-printer.user.js
@@ -140,7 +140,7 @@ const downloadBtn = () => {
         showOverlay("Starting Download...");
         try {
             console.log("Download clicked");
-            const elements = $(".oqb-player-container>div").toArray();
+            const elements = $(".oqb-question-item-card").toArray();
 
             // Process ONE element (div) at a time
             for (const [i, el] of elements.entries()) {
@@ -170,7 +170,11 @@ const downloadBtn = () => {
                 await new Promise(resolve => setTimeout(resolve, 100));
 
                 // 3. Capture the canvas and trigger download
-                await captureOne(el, i + 1);
+                const element = [...el.querySelectorAll('.oqb-question-info-title')].find(el => el.children.length === 0 && el.innerText.trim() === "備註：")
+                const imageEl = el.querySelector('.oqb-player-container>div')
+                const qName = element?.nextElementSibling?.innerText ?? null
+                const fileName = qName.replace(/(\d{4})\sNo\.(\d{1,2})/g, (_, p1, p2) => `${p1}1A${p2.padStart(2, '0')}`)
+                await captureOne(imageEl, fileName);
 
                 // 4. AGGRESSIVE CLEANUP (Crucial for memory)
                 // We must remove the Base64 strings from the DOM immediately
